@@ -1,6 +1,6 @@
-
 // file: src/pages/profile.tsx
 import { useState } from "react";
+import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
 
 interface TripMeta {
   id: string;
@@ -8,6 +8,8 @@ interface TripMeta {
   uploadType: "builder" | "pdf" | "gdoc";
   fileUrl?: string;
   docUrl?: string;
+  start_date?: string;
+  end_date?: string;
 }
 
 export default function ProfilePage() {
@@ -19,7 +21,7 @@ export default function ProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const fakeUrl = URL.createObjectURL(file); // temporary
+    const fakeUrl = URL.createObjectURL(file);
     const newTrip: TripMeta = {
       id: Date.now().toString(),
       title: file.name,
@@ -46,6 +48,10 @@ export default function ProfilePage() {
     input.value = "";
   };
 
+  const handleTripBuilderCreate = (trip: BuilderTrip) => {
+    setTrips((prev) => [trip, ...prev]);
+  };
+
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
       <h1 style={{ fontSize: 28 }}>👤 Matt's Profile</h1>
@@ -57,8 +63,9 @@ export default function ProfilePage() {
 
       {tab === "trips" && (
         <div style={{ marginTop: 30 }}>
-          <h2>📄 Upload Trip</h2>
+          <CreateTrip onCreate={handleTripBuilderCreate} />
 
+          <h2>📄 Upload Trip</h2>
           <div style={{ marginBottom: 20 }}>
             <label>
               Upload PDF:
@@ -100,3 +107,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
