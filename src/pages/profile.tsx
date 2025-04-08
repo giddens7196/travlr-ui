@@ -1,3 +1,4 @@
+// file: src/pages/profile.tsx
 import { useState } from "react";
 import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
 import NavBar from "../components/NavBar";
@@ -14,10 +15,20 @@ interface TripMeta {
 }
 
 export default function ProfilePage() {
-  const currentUser = localStorage.getItem("user") || "Matt"; // ✅ read selected user
+  const currentUser = localStorage.getItem("user") || "Matt";
   const [tab, setTab] = useState<"timeline" | "trips">("timeline");
-  const [trips, setTrips] = useState<TripMeta[]>([]);
+  const [trips, setTrips] = useState<TripMeta[]>(() => {
+    const stored = JSON.parse(localStorage.getItem("trips") || "[]");
+    return stored.filter((trip: TripMeta) => trip.user === currentUser);
+  });
   const [uploading, setUploading] = useState(false);
+
+  const saveTrip = (newTrip: TripMeta) => {
+    const all = JSON.parse(localStorage.getItem("trips") || "[]");
+    const updated = [newTrip, ...all];
+    localStorage.setItem("trips", JSON.stringify(updated));
+    setTrips(updated.filter((trip: TripMeta) => trip.user === currentUser));
+  };
 
   const handlePDFUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -31,12 +42,9 @@ export default function ProfilePage() {
       fileUrl: fakeUrl,
       user: currentUser,
     };
-    setTrips((prev) => {
-  const updated = [newTrip, ...prev];
-  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
-  return updated;
-});
-
+    saveTrip(newTrip);
+    setUploading(false);
+  };
 
   const handleGoogleDocSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,29 +59,22 @@ export default function ProfilePage() {
       docUrl: url,
       user: currentUser,
     };
-   setTrips((prev) => {
-  const updated = [newTrip, ...prev];
-  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
-  return updated;
-});
-
+    saveTrip(newTrip);
+    input.value = "";
+  };
 
   const handleTripBuilderCreate = (trip: BuilderTrip) => {
     const newTrip: TripMeta = {
       ...trip,
       user: currentUser,
     };
-   setTrips((prev) => {
-  const updated = [trip, ...prev];
-  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
-  return updated;
-});
-
+    saveTrip(newTrip);
+  };
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
       <NavBar />
-      <h1 style={{ fontSize: 28 }}>👤 {currentUser}'s Profile</h1> {/* ✅ dynamic user heading */}
+      <h1 style={{ fontSize: 28 }}>👤 {currentUser}'s Profile</h1>
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
         <button onClick={() => setTab("timeline")}>Timeline</button>
