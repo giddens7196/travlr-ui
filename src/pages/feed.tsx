@@ -1,5 +1,5 @@
-// file: src/pages/feed.tsx
 import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
 
 interface TripCardProps {
   title: string;
@@ -45,6 +45,7 @@ export default function FeedPage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
+      <NavBar />
       <h1 style={{ fontSize: 28 }}>📰 Trip Feed</h1>
       <p>Here’s what your friends have been up to recently:</p>
 
