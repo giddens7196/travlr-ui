@@ -41,6 +41,7 @@ export default function NavBar() {
         {navItem('/', 'Home')}
         {navItem('/feed', 'Feed')}
         {navItem('/profile', 'Profile')}
+        {navItem('/friends', 'Friends')} {/* 👈 New link added */}
       </div>
       <select
         value={user}
