@@ -1,6 +1,6 @@
-// file: src/pages/profile.tsx
 import { useState } from "react";
 import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
+import NavBar from "../components/NavBar";
 
 interface TripMeta {
   id: string;
@@ -54,6 +54,7 @@ export default function ProfilePage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
+      <NavBar />
       <h1 style={{ fontSize: 28 }}>👤 Matt's Profile</h1>
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
@@ -107,4 +108,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
