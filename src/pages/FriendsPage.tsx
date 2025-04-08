@@ -26,8 +26,11 @@ export default function FriendsPage() {
   return (
     <div style={{ padding: 20, maxWidth: 600, margin: "auto" }}>
       <h1 style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
-        {activeUser}'s Friends
+        {activeUser ? `${activeUser}'s Friends` : "Loading user..."}
       </h1>
+      <p style={{ color: "#999", marginBottom: 8 }}>
+        Debug: user = {activeUser}, friends found = {friends.length}
+      </p>
       {friends.length === 0 ? (
         <p style={{ color: "#666" }}>No friends yet. Go add some!</p>
       ) : (
