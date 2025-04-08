@@ -9,6 +9,8 @@ const USERS: Record<string, string[]> = {
 };
 
 export default function FriendsPage() {
+  console.log("✅ FriendsPage component loaded");
+
   const navigate = useNavigate();
   const [activeUser, setActiveUser] = useState<string>("Matt");
   const [friends, setFriends] = useState<string[]>([]);
@@ -50,5 +52,3 @@ export default function FriendsPage() {
     </div>
   );
 }
-
-
