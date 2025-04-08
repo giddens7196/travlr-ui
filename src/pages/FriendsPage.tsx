@@ -10,11 +10,15 @@ const USERS: Record<string, string[]> = {
 
 export default function FriendsPage() {
   const navigate = useNavigate();
-  const [activeUser, setActiveUser] = useState<string>("");
+  const [activeUser, setActiveUser] = useState<string>("Matt");
   const [friends, setFriends] = useState<string[]>([]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || "Matt";
+    let storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      storedUser = "Matt";
+      localStorage.setItem("user", "Matt");
+    }
     setActiveUser(storedUser);
     setFriends(USERS[storedUser] || []);
   }, []);
