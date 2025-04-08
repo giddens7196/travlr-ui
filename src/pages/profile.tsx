@@ -31,9 +31,12 @@ export default function ProfilePage() {
       fileUrl: fakeUrl,
       user: currentUser,
     };
-    setTrips((prev) => [newTrip, ...prev]);
-    setUploading(false);
-  };
+    setTrips((prev) => {
+  const updated = [newTrip, ...prev];
+  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
+  return updated;
+});
+
 
   const handleGoogleDocSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,17 +51,24 @@ export default function ProfilePage() {
       docUrl: url,
       user: currentUser,
     };
-    setTrips((prev) => [newTrip, ...prev]);
-    input.value = "";
-  };
+   setTrips((prev) => {
+  const updated = [newTrip, ...prev];
+  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
+  return updated;
+});
+
 
   const handleTripBuilderCreate = (trip: BuilderTrip) => {
     const newTrip: TripMeta = {
       ...trip,
       user: currentUser,
     };
-    setTrips((prev) => [newTrip, ...prev]);
-  };
+   setTrips((prev) => {
+  const updated = [trip, ...prev];
+  localStorage.setItem("trips", JSON.stringify(updated)); // ✅ added
+  return updated;
+});
+
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
