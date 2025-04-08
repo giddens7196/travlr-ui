@@ -10,9 +10,11 @@ interface TripMeta {
   docUrl?: string;
   start_date?: string;
   end_date?: string;
+  user?: string;
 }
 
 export default function ProfilePage() {
+  const currentUser = localStorage.getItem("user") || "Matt"; // ✅ read selected user
   const [tab, setTab] = useState<"timeline" | "trips">("timeline");
   const [trips, setTrips] = useState<TripMeta[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -27,6 +29,7 @@ export default function ProfilePage() {
       title: file.name,
       uploadType: "pdf",
       fileUrl: fakeUrl,
+      user: currentUser,
     };
     setTrips((prev) => [newTrip, ...prev]);
     setUploading(false);
@@ -43,19 +46,24 @@ export default function ProfilePage() {
       title: "Google Doc Trip",
       uploadType: "gdoc",
       docUrl: url,
+      user: currentUser,
     };
     setTrips((prev) => [newTrip, ...prev]);
     input.value = "";
   };
 
   const handleTripBuilderCreate = (trip: BuilderTrip) => {
-    setTrips((prev) => [trip, ...prev]);
+    const newTrip: TripMeta = {
+      ...trip,
+      user: currentUser,
+    };
+    setTrips((prev) => [newTrip, ...prev]);
   };
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
       <NavBar />
-      <h1 style={{ fontSize: 28 }}>👤 Matt's Profile</h1>
+      <h1 style={{ fontSize: 28 }}>👤 {currentUser}'s Profile</h1> {/* ✅ dynamic user heading */}
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
         <button onClick={() => setTab("timeline")}>Timeline</button>
