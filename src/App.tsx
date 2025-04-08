@@ -1,7 +1,7 @@
 // file: src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/profile";
 import FeedPage from "./pages/FeedPage";
 import FriendsPage from "./pages/FriendsPage";
 
