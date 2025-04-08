@@ -20,17 +20,19 @@ export default function FriendsPage() {
   }, []);
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">{activeUser}'s Friends</h1>
+    <div style={{ padding: 20, maxWidth: 600, margin: "auto" }}>
+      <h1 style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
+        {activeUser}'s Friends
+      </h1>
       {friends.length === 0 ? (
-        <p className="text-gray-600">No friends yet. Go add some!</p>
+        <p style={{ color: "#666" }}>No friends yet. Go add some!</p>
       ) : (
-        <ul className="space-y-3">
+        <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
           {friends.map((friend) => (
             <li
               key={friend}
               onClick={() => navigate(`/profile?user=${friend}`)}
-              className="cursor-pointer text-blue-600 hover:underline"
+              style={{ cursor: "pointer", color: "#0070f3", marginBottom: 8, textDecoration: "underline" }}
             >
               {friend}
             </li>
