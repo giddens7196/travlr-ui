@@ -22,7 +22,7 @@ function App() {
               </>
             }
           />
-          <Route path="/profile" element={<profile />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/friends" element={<FriendsPage />} />
         </Routes>
