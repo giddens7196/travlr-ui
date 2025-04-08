@@ -25,6 +25,7 @@ export default function FriendsPage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 600, margin: "auto" }}>
+      <h2 style={{ color: "green", marginBottom: 16 }}>✅ This is the friends page</h2>
       <h1 style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
         {activeUser ? `${activeUser}'s Friends` : "Loading user..."}
       </h1>
