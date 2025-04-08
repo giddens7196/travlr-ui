@@ -14,7 +14,7 @@ export default function FriendsPage() {
   const [friends, setFriends] = useState<string[]>([]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("activeUser") || "Matt";
+    const storedUser = localStorage.getItem("user") || "Matt";
     setActiveUser(storedUser);
     setFriends(USERS[storedUser] || []);
   }, []);
