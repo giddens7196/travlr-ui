@@ -1,4 +1,4 @@
-// src/pages/FriendsPage.tsx
+// file: src/pages/FriendsPage.tsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
