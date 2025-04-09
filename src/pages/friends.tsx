@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 const FRIENDS = ["Matt", "Sara", "Jordan"];
 
 export default function FriendsPage() {
+  console.log("✅ FriendsPage loaded");
   const navigate = useNavigate();
 
   return (
