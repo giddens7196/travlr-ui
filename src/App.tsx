@@ -6,6 +6,7 @@ import ProfilePage from "./pages/profile";
 import FeedPage from "./pages/feed";
 import FriendsPage from "./pages/friends";
 import TestPage from "./pages/test";
+import WishlistPage from "./pages/wishlist";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
     </BrowserRouter>
   );
