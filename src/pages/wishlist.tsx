@@ -1,6 +1,5 @@
 // file: src/pages/wishlist.tsx
 import { useState } from "react";
-import NavBar from "../components/NavBar";
 
 interface WishlistItem {
   id: string;
