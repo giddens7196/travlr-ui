@@ -1,33 +1,31 @@
 // file: src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProfilePage from "./pages/profile";
 import FeedPage from "./pages/feed";
-import FriendsPage from "./pages/FriendsList";
+import FriendsPage from "./pages/friends";
 
 function App() {
   return (
-    <Router>
-      <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
-        <NavBar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <h1 style={{ fontSize: 28 }}>🏠 Welcome to Travlr</h1>
-                <p style={{ marginTop: 12 }}>
-                  This is your travel social hub. Use the nav bar above to explore your profile, trip feed, and more.
-                </p>
-              </>
-            }
-          />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/feed" element={<FeedPage />} />
-          <Route path="/friends" element={<FriendsView />} />
-        </Routes>
-      </div>
-    </Router>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/friends" element={<FriendsPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function Home() {
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>🏠 Welcome to Travlr</h1>
+      <p>Use the navigation above to get started.</p>
+    </div>
   );
 }
 
