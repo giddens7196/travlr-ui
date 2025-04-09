@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProfilePage from "./pages/profile";
 import FeedPage from "./pages/feed";
-import FriendsPage from "./pages/FriendsView";
+import FriendsPage from "./pages/FriendsList";
 
 function App() {
   return (
