@@ -2,6 +2,7 @@
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
+import TripCard from "../components/TripCard";
 import NavBar from "../components/NavBar";
 
 interface TripMeta {
@@ -112,15 +113,7 @@ export default function ProfilePage() {
             <h3>📚 {overrideUser ? `${overrideUser}'s` : "Your"} Trips</h3>
             {uploading && <p>Uploading...</p>}
             {trips.map((trip) => (
-              <div key={trip.id} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
-                <p><strong>{trip.title}</strong> ({trip.uploadType})</p>
-                {trip.uploadType === "pdf" && trip.fileUrl && (
-                  <a href={trip.fileUrl} target="_blank" rel="noopener noreferrer">View PDF</a>
-                )}
-                {trip.uploadType === "gdoc" && trip.docUrl && (
-                  <a href={trip.docUrl} target="_blank" rel="noopener noreferrer">View Google Doc</a>
-                )}
-              </div>
+              <TripCard key={trip.id} trip={trip} />
             ))}
           </div>
         </div>
