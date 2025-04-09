@@ -31,7 +31,6 @@ export default function WishlistPage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
-      <NavBar />
       <h1 style={{ fontSize: 28 }}>🌍 Trips I Want to Take</h1>
 
       <div style={{ marginTop: 20 }}>
