@@ -1,66 +1,37 @@
+// file: src/pages/feed.tsx
 import { useEffect, useState } from "react";
+import TripCard from "../components/TripCard";
 import NavBar from "../components/NavBar";
 
-interface TripCardProps {
+interface TripMeta {
+  id: string;
   title: string;
-  user: string;
-  days: number;
-  location: string;
-  type: string;
-  link?: string;
+  uploadType: "builder" | "pdf" | "gdoc";
+  fileUrl?: string;
+  docUrl?: string;
+  start_date?: string;
+  end_date?: string;
+  user?: string;
 }
 
-const mockTrips: TripCardProps[] = [
-  {
-    title: "8-Day Paris Adventure",
-    user: "Matt",
-    days: 8,
-    location: "Paris",
-    type: "builder",
-  },
-  {
-    title: "Girls Trip to Tulum",
-    user: "Sara",
-    days: 5,
-    location: "Tulum",
-    type: "pdf",
-    link: "https://example.com/sara-trip.pdf",
-  },
-  {
-    title: "2 Weeks in Italy",
-    user: "Jordan",
-    days: 14,
-    location: "Rome, Florence, Venice",
-    type: "gdoc",
-    link: "https://docs.google.com/document/d/example",
-  },
-];
-
 export default function FeedPage() {
-  const [trips, setTrips] = useState<TripCardProps[]>([]);
+  const [trips, setTrips] = useState<TripMeta[]>([]);
 
   useEffect(() => {
-    setTrips(mockTrips);
+    const all = JSON.parse(localStorage.getItem("trips") || "[]");
+    setTrips(all);
   }, []);
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
       <NavBar />
-      <h1 style={{ fontSize: 28 }}>📰 Trip Feed</h1>
-      <p>Here’s what your friends have been up to recently:</p>
+      <h1 style={{ fontSize: 28 }}>📰 News Feed</h1>
 
-      {trips.map((trip, idx) => (
-        <div key={idx} style={{ border: "1px solid #ddd", padding: 12, marginTop: 16 }}>
-          <p><strong>{trip.user}</strong> just went on a <strong>{trip.days}-day trip</strong> to <strong>{trip.location}</strong>!</p>
-          <p style={{ marginBottom: 4 }}>{trip.title}</p>
-          {trip.link && (
-            <a href={trip.link} target="_blank" rel="noopener noreferrer">
-              View Trip ({trip.type})
-            </a>
-          )}
-        </div>
+      {trips.length === 0 && <p>No trips yet. Be the first to post!</p>}
+
+      {trips.map((trip) => (
+        <TripCard key={trip.id} trip={trip} />
       ))}
     </div>
   );
 }
-
