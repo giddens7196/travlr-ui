@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
 import TripCard from "../components/TripCard";
-import NavBar from "../components/NavBar";
 
 interface TripMeta {
   id: string;
@@ -13,6 +12,10 @@ interface TripMeta {
   docUrl?: string;
   start_date?: string;
   end_date?: string;
+  destinations?: string[];
+  tags?: string[];
+  shared_with?: string[];
+  day_plans?: any[];
   user?: string;
 }
 
@@ -77,7 +80,6 @@ export default function ProfilePage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
-      <NavBar />
       <h1 style={{ fontSize: 28 }}>👤 {currentUser}'s Profile</h1>
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
