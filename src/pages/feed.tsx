@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import TripCard from "../components/TripCard";
 import SearchBar from "../components/SearchBar";
-import NavBar from "../components/NavBar";
 
 interface TripMeta {
   id: string;
@@ -36,7 +35,6 @@ export default function FeedPage() {
 
   return (
     <div style={{ padding: 20, maxWidth: 900, margin: "auto" }}>
-      <NavBar />
       <h1 style={{ fontSize: 28 }}>📰 News Feed</h1>
 
       <SearchBar query={query} onChange={setQuery} />
