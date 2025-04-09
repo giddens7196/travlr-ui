@@ -1,4 +1,4 @@
-// file: src/pages/FriendsPage.tsx
+// file: src/pages/FriendsView.tsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +8,8 @@ const USERS: Record<string, string[]> = {
   Jordan: ["Matt"],
 };
 
-export default function FriendsPage() {
-  console.log("✅ FriendsPage component loaded");
+export default function FriendsView() {
+  console.log("✅ FriendsView component loaded");
 
   const navigate = useNavigate();
   const [activeUser, setActiveUser] = useState<string>("Matt");
