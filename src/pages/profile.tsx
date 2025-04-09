@@ -1,4 +1,5 @@
 // file: src/pages/profile.tsx
+import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import CreateTrip, { Trip as BuilderTrip } from "../components/CreateTrip";
 import NavBar from "../components/NavBar";
@@ -15,7 +16,9 @@ interface TripMeta {
 }
 
 export default function ProfilePage() {
-  const currentUser = localStorage.getItem("user") || "Matt";
+  const [params] = useSearchParams();
+  const overrideUser = params.get("user");
+  const currentUser = overrideUser || localStorage.getItem("user") || "Matt";
   const [tab, setTab] = useState<"timeline" | "trips">("timeline");
   const [trips, setTrips] = useState<TripMeta[]>(() => {
     const stored = JSON.parse(localStorage.getItem("trips") || "[]");
@@ -83,26 +86,30 @@ export default function ProfilePage() {
 
       {tab === "trips" && (
         <div style={{ marginTop: 30 }}>
-          <CreateTrip onCreate={handleTripBuilderCreate} />
+          {!overrideUser && <CreateTrip onCreate={handleTripBuilderCreate} />}
 
-          <h2>📄 Upload Trip</h2>
-          <div style={{ marginBottom: 20 }}>
-            <label>
-              Upload PDF:
-              <input type="file" accept="application/pdf" onChange={handlePDFUpload} />
-            </label>
-          </div>
+          {!overrideUser && (
+            <>
+              <h2>📄 Upload Trip</h2>
+              <div style={{ marginBottom: 20 }}>
+                <label>
+                  Upload PDF:
+                  <input type="file" accept="application/pdf" onChange={handlePDFUpload} />
+                </label>
+              </div>
 
-          <form onSubmit={handleGoogleDocSubmit}>
-            <label>
-              Paste Google Doc URL:
-              <input name="docUrl" placeholder="https://docs.google.com/..." style={{ width: "100%" }} />
-            </label>
-            <button type="submit">Submit Google Doc</button>
-          </form>
+              <form onSubmit={handleGoogleDocSubmit}>
+                <label>
+                  Paste Google Doc URL:
+                  <input name="docUrl" placeholder="https://docs.google.com/..." style={{ width: "100%" }} />
+                </label>
+                <button type="submit">Submit Google Doc</button>
+              </form>
+            </>
+          )}
 
           <div style={{ marginTop: 40 }}>
-            <h3>📚 Your Trips</h3>
+            <h3>📚 {overrideUser ? `${overrideUser}'s` : "Your"} Trips</h3>
             {uploading && <p>Uploading...</p>}
             {trips.map((trip) => (
               <div key={trip.id} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
