@@ -24,7 +24,7 @@ function App() {
           />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/feed" element={<FeedPage />} />
-          <Route path="/friends" element={<FriendsPage />} />
+          <Route path="/friends" element={<FriendsView />} />
         </Routes>
       </div>
     </Router>
