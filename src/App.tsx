@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import ProfilePage from "./pages/profile";
 import FeedPage from "./pages/feed";
 import FriendsPage from "./pages/friends";
+import TestPage from "./pages/test";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </BrowserRouter>
   );
